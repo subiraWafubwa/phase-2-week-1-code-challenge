@@ -8,6 +8,11 @@ function AddTransactionForm({ addTransaction }) {
     amount: "",
   });
 
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(formData);
+  }
+
   return (
     <div className="ui segment">
       <form className="ui form" onSubmit={(e) => addTransaction(e, formData)}>
@@ -16,27 +21,21 @@ function AddTransactionForm({ addTransaction }) {
             type="date"
             name="date"
             value={formData.date}
-            onChange={(e) => {
-              setFormData({ ...formData, [e.target.name]: e.target.value });
-            }}
+            onChange={handleChange}
           />
           <input
             type="text"
             name="description"
             placeholder="Description"
             value={formData.description}
-            onChange={(e) => {
-              setFormData({ ...formData, [e.target.name]: e.target.value });
-            }}
+            onChange={handleChange}
           />
           <input
             type="text"
             name="category"
             placeholder="Category"
             value={formData.category}
-            onChange={(e) => {
-              setFormData({ ...formData, [e.target.name]: e.target.value });
-            }}
+            onChange={handleChange}
           />
           <input
             type="number"
@@ -44,9 +43,7 @@ function AddTransactionForm({ addTransaction }) {
             placeholder="Amount"
             step="0.01"
             value={formData.amount}
-            onChange={(e) => {
-              setFormData({ ...formData, [e.target.name]: e.target.value });
-            }}
+            onChange={handleChange}
           />
         </div>
         <button className="ui button" type="submit">

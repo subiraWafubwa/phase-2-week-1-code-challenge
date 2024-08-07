@@ -28,7 +28,7 @@ function AccountContainer() {
     fetch("http://localhost:8001/transactions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ data, amount: parseInt(data.amount) }),
+      body: JSON.stringify({ ...data, amount: parseInt(data.amount) }),
     })
       .then((response) => {
         return response.json();
