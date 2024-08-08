@@ -10,12 +10,23 @@ function AddTransactionForm({ addTransaction }) {
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const { date, description, category, amount } = formData;
+
+    // Check if all fields are filled
+    if (date && description && category && amount) {
+      addTransaction(e, formData);
+    } else {
+      alert("Please fill in all fields before submitting.");
+    }
   }
 
   return (
     <div className="ui segment">
-      <form className="ui form" onSubmit={(e) => addTransaction(e, formData)}>
+      <form className="ui form" onSubmit={handleSubmit}>
         <div className="inline fields">
           <input
             type="date"

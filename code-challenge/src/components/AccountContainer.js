@@ -6,7 +6,7 @@ import AddTransactionForm from "./AddTransactionForm";
 function AccountContainer() {
   const [transactions, setTransactions] = useState([]);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
-  const [searchValue, setSeacrchValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   // Fetching list from db.json
   useEffect(() => {
@@ -31,8 +31,17 @@ function AccountContainer() {
       body: JSON.stringify({ ...data, amount: parseInt(data.amount) }),
     })
       .then((response) => {
-        window.location.reload();
+        if (response.status !== 201) {
+          alert("An error has occurred while trying to add data");
+        }
+
         return response.json();
+      })
+      .then((newTransaction) => {
+        setTransactions((previousTransaction) => [
+          ...previousTransaction,
+          newTransaction,
+        ]);
       })
       .catch((e) => {
         console.log(`Error from POST: ${e}`);
@@ -60,7 +69,7 @@ function AccountContainer() {
 
   return (
     <div>
-      <Search searchValue={searchValue} setSeacrchValue={setSeacrchValue} />
+      <Search searchValue={searchValue} setSearchValue={setSearchValue} />
       <AddTransactionForm addTransaction={addTransaction} />
       <TransactionsList transactions={filteredTransactions} />
     </div>
