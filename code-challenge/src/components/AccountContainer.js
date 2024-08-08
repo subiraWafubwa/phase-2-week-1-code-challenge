@@ -31,6 +31,7 @@ function AccountContainer() {
       body: JSON.stringify({ ...data, amount: parseInt(data.amount) }),
     })
       .then((response) => {
+        window.location.reload();
         return response.json();
       })
       .catch((e) => {
