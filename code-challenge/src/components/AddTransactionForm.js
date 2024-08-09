@@ -19,6 +19,12 @@ function AddTransactionForm({ addTransaction }) {
     // Check if all fields are filled
     if (date && description && category && amount) {
       addTransaction(e, formData);
+      setFormData({
+        date: "",
+        description: "",
+        category: "",
+        amount: "",
+      });
     } else {
       alert("Please fill in all fields before submitting.");
     }
