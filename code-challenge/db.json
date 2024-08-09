@@ -83,6 +83,13 @@
       "description": "Venmo, Pay Roommate for Rent",
       "category": "Housing",
       "amount": -975
+    },
+    {
+      "date": "2024-08-10",
+      "description": "Van Dame",
+      "category": "Spoilers",
+      "amount": 400,
+      "id": 13
     }
   ]
 }
