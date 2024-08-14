@@ -8,6 +8,25 @@ function AccountContainer() {
   const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
+  // Search value
+  useEffect(() => {
+    if (searchValue !== "") {
+      const filteredResults = transactions.filter((transaction) => {
+        return (
+          transaction.description
+            ?.toLowerCase()
+            .includes(searchValue.toLowerCase()) ||
+          transaction.category
+            ?.toLowerCase()
+            .includes(searchValue.toLowerCase())
+        );
+      });
+      setFilteredTransactions(filteredResults);
+    } else {
+      setFilteredTransactions(transactions);
+    }
+  }, [transactions, searchValue]);
+
   // Fetching list from db.json
   useEffect(() => {
     fetch("http://localhost:8001/transactions")
@@ -47,25 +66,6 @@ function AccountContainer() {
         console.log(`Error from POST: ${e}`);
       });
   };
-
-  // Search value
-  useEffect(() => {
-    if (searchValue !== "") {
-      const filteredResults = transactions.filter((transaction) => {
-        return (
-          transaction.description
-            ?.toLowerCase()
-            .includes(searchValue.toLowerCase()) ||
-          transaction.category
-            ?.toLowerCase()
-            .includes(searchValue.toLowerCase())
-        );
-      });
-      setFilteredTransactions(filteredResults);
-    } else {
-      setFilteredTransactions(transactions);
-    }
-  }, [transactions, searchValue]);
 
   return (
     <div>
